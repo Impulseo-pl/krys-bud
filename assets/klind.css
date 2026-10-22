@@ -251,3 +251,70 @@ footer p{color:var(--on-dark-soft)}
 /* menu otwarte: pasek z logo i pigułką nad warstwą menu (pigułka = zamknij) */
 body.menu-open .kh{position:fixed;z-index:80}
 body.menu-open .kh-tel{color:var(--on-dark)}
+
+/* ============================================================
+   KOLORY KLIENTA (22.10.2026): czerń + złoto z logo KRYŚ-BUD
+   (awatar FB: złoty znak #BEA462 na czarnym tle).
+   Ten :root jest OSTATNI w kaskadzie - wygrywa nad beżem wyżej.
+   ============================================================ */
+:root{
+  --paper:#0E0D0B; --paper-2:#16140F; --paper-3:#201D17;
+  --ink:#F1ECE1; --ink-soft:#D2CBBC; --muted:#A8A090;
+  --line:rgba(241,236,225,.14);
+  --accent:#BEA462; --accent-d:#D2BA7C; --accent-soft:rgba(190,164,98,.14);
+  --accent-text:#D2BA7C;
+  --dark:#191712; --dark-2:#221F18; --on-dark:#F1ECE1; --on-dark-soft:rgba(241,236,225,.70);
+}
+html,body{background:var(--paper)}
+/* pigułka menu: złota z czarnymi kreskami, jak logo */
+.kh-burger{background:rgba(190,164,98,.94)}
+.kh-burger span{background:#0E0D0B}
+.kh-burger:hover{background:#CDB577}
+body.menu-open .kh-burger{background:var(--accent)}
+/* przyciski: złoty kontur, wypełnienie złotem przy najechaniu */
+.kx-pill,.btn,.btn-accent{color:var(--ink);border-color:var(--accent)}
+.kx-pill:hover,.btn:hover,.btn-accent:hover{background:var(--accent);color:#0E0D0B;border-color:var(--accent)}
+.kx-pill.on-dark,.on-dark .kx-pill,.cta .btn,.cta .btn-light,.cta .btn-ghost-cta{color:var(--on-dark);border-color:var(--accent)}
+.kx-pill.on-dark:hover,.on-dark .kx-pill:hover,.cta .btn:hover{background:var(--accent);color:#0E0D0B;border-color:var(--accent)}
+.obszar-list li.is-home,.sc-call{color:#0E0D0B}
+.kx-hero h1,.pagehead h1{color:var(--ink)}
+.kx-hero h1 em,.kx-giant em{color:var(--accent);font-style:normal}
+.kx-hero-tel:hover,.kh-tel:hover{color:var(--accent)}
+.kx-arrows button:hover{background:var(--accent);color:#0E0D0B;border-color:var(--accent)}
+.kx-prog i{background:var(--accent)}
+.kx-proj .kx-tag{background:rgba(14,13,11,.72)}
+.sticky-call{background:#0E0D0B;border-top:1px solid rgba(190,164,98,.35)}
+footer{background:#0A0908}
+
+/* ============================================================
+   EKRAN WEJŚCIA z logo (tylko strona główna, raz na wizytę):
+   złota kurtyna w kolorze logo, znak wchodzi ciemny (maska + ostrość),
+   kreska pod nim, kurtyna odjeżdża w dół, a logo leci do paska
+   i po drodze wraca do swojego złota. ?intro w adresie = powtórka.
+   ============================================================ */
+.intro{display:none}
+.intro-on .intro{display:block;position:fixed;inset:0;z-index:100;background:#BEA462;
+  clip-path:inset(0 0 0 0);transition:clip-path .64s cubic-bezier(.16,1,.3,1)}
+.intro-on.intro-out .intro{clip-path:inset(100% 0 0 0)}
+.intro-line{position:fixed;left:50%;top:calc(50% + var(--i-h,90px)/2 + 24px);width:calc(var(--i-w,300px)*.42);height:2px;
+  background:#0E0D0B;transform:translateX(-50%) scaleX(0);transition:transform .46s cubic-bezier(.16,1,.3,1) .14s}
+.intro-gra .intro-line{transform:translateX(-50%) scaleX(1)}
+.intro-on .kh{z-index:101}
+.intro-on:not(.intro-out) .kh-burger,.intro-on:not(.intro-out) .kh-tel{visibility:hidden}
+.intro-znak .kh-logo{display:block;width:var(--i-bw);height:var(--i-bh)}
+.intro-znak .kh-logo img{position:fixed;left:50%;top:50%;width:var(--i-w);height:var(--i-h);max-width:none;z-index:102;
+  transform:translate(-50%,-50%) scale(1.045);clip-path:inset(0 100% 0 0);filter:brightness(0) blur(14px);transition:none}
+.intro-znak.intro-gra .kh-logo img{transform:translate(-50%,-50%) scale(1);clip-path:inset(0 0 0 0);filter:brightness(0) blur(0);
+  transition:clip-path .5s cubic-bezier(.16,1,.3,1),filter .5s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1)}
+.intro-znak.intro-out .kh-logo img{transform:translate(calc(-50% + var(--i-px)),calc(-50% + var(--i-py))) scale(var(--i-zm));
+  filter:brightness(1) blur(0);transition:transform .74s cubic-bezier(.16,.84,.44,1),filter .18s linear}
+@media (prefers-reduced-motion:reduce){.intro{display:none!important}}
+
+/* karty z białym tłem w bazie - na czarnej skórce grafitowe ze złotym akcentem */
+.form,.svc,.trust-card,.obj-tile{background:var(--paper-2);border:1px solid var(--line);box-shadow:none}
+.form input,.form textarea,.form input:focus,.form textarea:focus{background:var(--paper-3);color:var(--ink)}
+.btn-light{background:var(--accent);color:#0E0D0B}
+.form .btn-accent{background:var(--accent);color:#0E0D0B;border-color:var(--accent)}
+.form .btn-accent:hover{background:#CDB577}
+.kh-tel{text-shadow:0 1px 10px rgba(0,0,0,.55)}
+.stopklatka{background:var(--paper-2)}

@@ -23,9 +23,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Gloock&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css?v=20261022">
-<link rel="stylesheet" href="assets/klind.css?v=20261022">
+<link rel="stylesheet" href="assets/klind.css?v=20261022b">
+<link rel="preload" as="image" href="img/logo.png" fetchpriority="high">
+<script>(function(){try{var d=document.documentElement,q=/[?&]intro/.test(location.search);if(!q&&window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;if(!q&&sessionStorage.getItem('krysbud_intro'))return;sessionStorage.setItem('krysbud_intro','1');d.classList.add('intro-on');setTimeout(function(){d.classList.remove('intro-on','intro-znak','intro-gra','intro-out')},4000);}catch(e){}})();</script>
 </head>
 <body>
+<div class="intro" aria-hidden="true"><span class="intro-line"></span></div>
 
 <header class="kh">
   <div class="kh-in">
@@ -35,6 +38,31 @@
   </div>
   <button class="kh-burger" aria-label="Menu" aria-expanded="false" aria-controls="kmenu"><span></span><span></span></button>
 </header>
+<script>(function(){var d=document.documentElement;if(!d.classList.contains('intro-on'))return;
+var logo=document.querySelector('.kh-logo img'),koniec=false,wyszlo=false,ruszylo=false,t0=0,MIN=560,SUFIT=880,zal=false,V=['--i-w','--i-h','--i-zm','--i-px','--i-py','--i-bw','--i-bh'];
+function sprzataj(){if(koniec)return;koniec=true;d.classList.remove('intro-on','intro-znak','intro-gra','intro-out');V.forEach(function(k){d.style.removeProperty(k);});}
+function wyjdz(){if(wyszlo||koniec)return;wyszlo=true;d.classList.add('intro-out');setTimeout(sprzataj,820);}
+function hero(){var im=document.querySelector('.kx-hero-art img');return !!(im&&im.complete&&im.naturalWidth>0);}
+function moze(){if(wyszlo||koniec)return;var t=Date.now()-t0;if((t>=MIN&&(hero()||zal))||t>=SUFIT)wyjdz();else setTimeout(moze,70);}
+['wheel','touchstart','keydown','mousedown'].forEach(function(e){addEventListener(e,sprzataj,{once:true,passive:true});});
+addEventListener('load',function(){zal=true;});
+function graj(){if(koniec||ruszylo)return;ruszylo=true;try{
+var r=logo.getBoundingClientRect();if(!r.width){sprzataj();return;}
+var sufit=1100/Math.min(window.devicePixelRatio||1,3);
+var cel=innerWidth<680?Math.min(innerWidth*.72,320):Math.min(innerWidth*.4,460);
+cel=Math.max(r.width,Math.min(cel,sufit));
+d.style.setProperty('--i-w',Math.round(cel)+'px');d.style.setProperty('--i-h',Math.round(cel*337/1100)+'px');
+d.style.setProperty('--i-zm',(r.width/cel).toFixed(4));
+d.style.setProperty('--i-px',Math.round(r.left+r.width/2-innerWidth/2)+'px');
+d.style.setProperty('--i-py',Math.round(r.top+r.height/2-innerHeight/2)+'px');
+d.style.setProperty('--i-bw',Math.round(r.width)+'px');d.style.setProperty('--i-bh',Math.round(r.height)+'px');
+d.classList.add('intro-znak');
+requestAnimationFrame(function(){requestAnimationFrame(function(){d.classList.add('intro-gra');t0=Date.now();moze();setTimeout(sprzataj,2600);});});
+}catch(e){sprzataj();}}
+function zacznij(){if(logo.decode)logo.decode().then(graj,graj);else graj();}
+function jest(){return logo.complete&&logo.naturalWidth>0;}
+if(!logo){sprzataj();}else if(jest()){zacznij();}else{logo.addEventListener('load',zacznij);logo.addEventListener('error',sprzataj);setTimeout(function(){if(!jest())sprzataj();},1400);}
+})();</script>
 <div class="kmenu" id="kmenu" aria-hidden="true">
   <nav class="kmenu-links" aria-label="Menu główne">
       <a href="index.html" aria-current="page">Start</a>
